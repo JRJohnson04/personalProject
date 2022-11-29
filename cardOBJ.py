@@ -1,9 +1,11 @@
+from utils import loadSprite
 class card:
     name = ""
     flavorText = ""
-    def __init__(self, inName, inText):
+    def __init__(self, inName, inText, inSprite):
         self.name = inName
         self.flavorText = inText
+        self.sprite = loadSprite(inSprite, True)
 class attack(card):
     damage = 0
     damageType = ""

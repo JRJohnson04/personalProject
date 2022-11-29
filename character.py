@@ -5,10 +5,12 @@ class character:
     myDeck = []
     name = ""
     myClass = ""
-    def __init__(self, inDeck, inName, inClass):
+    myHP = 0
+    def __init__(self, inDeck, inName, inClass, inHP):
         self.name = inName
         self.myClass = inClass
         self.myDeck = deck.deck(inDeck)
+        self.myHP = inHP
 class player(character):
     def fillDeck(self):
         if (self.myClass == "Machine"):
@@ -44,4 +46,5 @@ class enemy(character):
             tankS = cardOBJ.debuff("Shield Wall","The enemy raises its shield, fully protecting itself.", 1, 1, 1.00)
             self.myDeck.addCard(tankS,1)
         elif (self.myClass == "Dummy"):
-            #i have no deck
+                doNothing= cardOBJ.card("Does Nothing", "Does Nothing")
+                self.myDeck.addCard(doNothing, 15)
