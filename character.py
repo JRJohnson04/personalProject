@@ -6,11 +6,14 @@ class character:
     name = ""
     myClass = ""
     myHP = 0
-    def __init__(self, inDeck, inName, inClass, inHP):
+    myDef = 0
+    outMult = 1
+    def __init__(self, inDeck, inName, inClass, inHP, inDef):
         self.name = inName
         self.myClass = inClass
         self.myDeck = deck.deck(inDeck)
         self.myHP = inHP
+        self.myDef = inDef
 class player(character):
     def fillDeck(self):
         if (self.myClass == "Machine"):
@@ -38,6 +41,7 @@ class enemy(character):
             self.myDeck.addCard(meleeD,7)
             meleeS = cardOBJ.buff("Bleeding Strike","The next strike will bleed, dealing damage over time.", 1, 3 )
             self.myDeck.addCard(meleeS,1)
+            self.myDeck.shuffle()
         elif(self.myClass =="Tank"):
             tankA=cardOBJ.attack("Bash", "Enemy bashes you with its shield, doing damage.", 3, "Physical")
             self.myDeck.addCard(tankA, 5)
@@ -45,6 +49,7 @@ class enemy(character):
             self.myDeck.addCard(tankD,9)
             tankS = cardOBJ.debuff("Shield Wall","The enemy raises its shield, fully protecting itself.", 1, 1, 1.00)
             self.myDeck.addCard(tankS,1)
+            self.myDeck.shuffle()
         elif (self.myClass == "Dummy"):
                 doNothing= cardOBJ.card("Does Nothing", "Does Nothing")
                 self.myDeck.addCard(doNothing, 15)

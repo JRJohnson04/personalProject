@@ -1,11 +1,14 @@
 from utils import loadSprite
+import character
 class card:
     name = ""
     flavorText = ""
+    played = 0
     def __init__(self, inName, inText, inSprite):
         self.name = inName
         self.flavorText = inText
         self.sprite = loadSprite(inSprite, True)
+
 class attack(card):
     damage = 0
     damageType = ""
@@ -14,6 +17,10 @@ class attack(card):
         self.flavorText = inText
         self.damage = inDamage
         self.damageType = inType
+    def play(self, target):
+        if (self.played==0):
+            self.played=1
+            target.myHP-= self.damage
 
 class defense(card):
     armor = 0
@@ -21,6 +28,10 @@ class defense(card):
         self.name = inName
         self.flavorText = inText
         self.armor = inArmor
+    def play(self,target):
+        if (self.played==0):
+            self.played=1
+            target.myDef += self.armor
 
 
 
@@ -39,7 +50,12 @@ class buff(effect):
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
-        self.buff = inBuff
+        self.buff = self.inBuff
+    def play(self,target):
+        if (self.played==0):
+            self.played=1
+            target.outMult = buff
+
 
 class debuff(effect):
     debuff = 0
@@ -48,4 +64,8 @@ class debuff(effect):
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
-        self.debuff = inDebuff
+        self.debuff = self.inDebuff
+    def play(self, target):
+        if (self.played==0):
+            self.played=1
+            target.myDef -=(target.myDef * self.debuff)
