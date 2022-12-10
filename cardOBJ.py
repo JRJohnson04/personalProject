@@ -1,9 +1,9 @@
 from utils import loadSprite
-import character
 class card:
     name = ""
     flavorText = ""
     played = 0
+    drawn = 0
     def __init__(self, inName, inText, inSprite):
         self.name = inName
         self.flavorText = inText
@@ -12,11 +12,12 @@ class card:
 class attack(card):
     damage = 0
     damageType = ""
-    def __init__(self, inName, inText, inDamage, inType):
+    def __init__(self, inName, inText, inDamage, inType,inSprite):
         self.name = inName
         self.flavorText = inText
         self.damage = inDamage
         self.damageType = inType
+        self.sprite = loadSprite(inSprite, True)
     def play(self, target):
         if (self.played==0):
             self.played=1
@@ -24,10 +25,11 @@ class attack(card):
 
 class defense(card):
     armor = 0
-    def __init__(self, inName, inText, inArmor):
+    def __init__(self, inName, inText, inArmor,inSprite):
         self.name = inName
         self.flavorText = inText
         self.armor = inArmor
+        self.sprite = loadSprite(inSprite, True)
     def play(self,target):
         if (self.played==0):
             self.played=1
@@ -38,19 +40,21 @@ class defense(card):
 class effect(card):
     isDOT = 0
     duration = 0
-    def __init__(self, inName, inText,inDOT, inDuration):
+    def __init__(self, inName, inText,inDOT, inDuration,inSprite):
         self.name = inName
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
+        self.sprite = loadSprite(inSprite, False)
 class buff(effect):
     buff = 0
-    def __init__(self, inName, inText, inDOT, inDuration, inBuff):
+    def __init__(self, inName, inText, inDOT, inDuration, inBuff,inSprite):
         self.name = inName
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
-        self.buff = self.inBuff
+        self.buff = inBuff
+        self.sprite = loadSprite(inSprite, True)
     def play(self,target):
         if (self.played==0):
             self.played=1
@@ -59,12 +63,13 @@ class buff(effect):
 
 class debuff(effect):
     debuff = 0
-    def __init__(self,inName, inText,  inDOT, inDuration, inDebuff):
+    def __init__(self,inName, inText,  inDOT, inDuration, inDebuff,inSprite):
         self.name = inName
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
-        self.debuff = self.inDebuff
+        self.debuff = inDebuff
+        self.sprite = loadSprite(inSprite, True)
     def play(self, target):
         if (self.played==0):
             self.played=1

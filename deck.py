@@ -1,21 +1,30 @@
-import cardOBJ as cardOBJ
-import random
-from utils import loadSprite
 import numpy
-class deck():
-    uDeck = []
-    discard = []
-    def __init__(self, inDeck):
-        self.uDeck = inDeck
+class Deck():
+    def __init__(self):
+        self.uDeck = []
+        self.discard = []
+        self.hand = []
     def addCard(self,aCard, count):
-        for i in count:
+        for i in range(count):
             self.uDeck.append(aCard)
     def shuffle(self):
         self.uDeck.shuffle()
+    def getIndex(self, search):
+        for i in range(len(self.hand)):
+            if(self.hand[i]==search):
+                return i
+    def removeFromHand(self, i):
+        self.hand.pop(i)
+
     def draw(self):
+
         for i in range(5):
             self.discard.append(self.uDeck[i])
-            self.uDeck.del(i)
+            self.hand.append(self.uDeck[i])
+            self.uDeck[i].drawn = 1
+            self.uDeck.pop(i)
             if (numpy.size(self.uDeck) == 0):
                 self.uDeck=self.discard
                 self.uDeck.shuffle()
+                for j in self.uDeck:
+                    self.uDeck[j].drawn = 0
