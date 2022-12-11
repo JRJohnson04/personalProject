@@ -25,8 +25,7 @@ class attack(card):
         if (self.played==0):
             self.played=1
             target.myHP-= self.damage
-    def place(self, surface, position, sprite):
-        surface.blit(sprite,position )
+
 
 
 class defense(card):
@@ -40,7 +39,7 @@ class defense(card):
     def play(self,target):
         if (self.played==0):
             self.played=1
-            target.myDef += self.armor
+            target.myHP += self.armor
 
 
 

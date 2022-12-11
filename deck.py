@@ -1,6 +1,7 @@
 import numpy
 import cardOBJ
 from utils import loadSprite
+import random
 import pygame
 class Deck():
     uDeck = []
@@ -21,8 +22,6 @@ class Deck():
     def addCard(self,aCard, count):
         for i in range(count):
             self.uDeck.append(aCard)
-    def shuffle(self):
-        self.uDeck.shuffle()
     def getIndex(self, search):
         for i in range(len(self.hand)):
             if(self.hand[i]==search):
@@ -41,6 +40,6 @@ class Deck():
             self.uDeck.pop(i)
             if (numpy.size(self.uDeck) == 0):
                 self.uDeck=self.discard
-                self.uDeck.shuffle()
+                #random.shuffle(self.uDeck)
                 for j in self.uDeck:
                     self.uDeck[j].drawn = 0
