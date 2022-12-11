@@ -46,8 +46,10 @@ class player(character):
 class enemy(character):
     def __init__(self, inClass):
         self.myClass=inClass
-        self.myHP = 15
         super().__init__(inClass,15)
+
+    def reset(self):
+        self.myHP=15
     def fillEDeck(self):
         sprite6= loadSprite("Placeholder", False)
         if (self.myClass== "Melee"):

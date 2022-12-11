@@ -11,6 +11,8 @@ class card:
         self.sprite = inSprite
     def __str__(self):
         return self.name
+    def play(self,target):
+        pass
 class attack(card):
     damage = 0
     damageType = ""
@@ -22,9 +24,7 @@ class attack(card):
         self.sprite = inSprite
 
     def play(self, target):
-        if (self.played==0):
-            self.played=1
-            target.myHP-= self.damage
+            target.myHP=target.myHP-self.damage
 
 
 
@@ -36,10 +36,8 @@ class defense(card):
         self.armor = inArmor
         self.sprite = inSprite
 
-    def play(self,target):
-        if (self.played==0):
-            self.played=1
-            target.myHP += self.armor
+    def play(self, target):
+           target.myHP += self.armor
 
 
 
@@ -64,8 +62,6 @@ class buff(effect):
 
 
     def play(self,target):
-        if (self.played==0):
-            self.played=1
             target.outMult = buff
 
 
@@ -81,6 +77,4 @@ class debuff(effect):
 
 
     def play(self, target):
-        if (self.played==0):
-            self.played=1
             target.myDef -=(target.myDef * self.debuff)

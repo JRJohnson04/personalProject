@@ -5,7 +5,6 @@ import random
 import pygame
 class Deck():
     uDeck = []
-    discard = []
     hand = []
     def __init__(self):
         self.uDeck = []
@@ -31,15 +30,13 @@ class Deck():
     def render(self,screen, i, x,y):
         sprite = loadSprite(getattr(self.hand[i], 'name'), False)
         screen.blit(sprite, (x,y))
-
+    def setDeck(self):
+        self.nDeck = [i for i in self.uDeck]
     def draw(self):
-        for i in range(5):
-            self.discard.append(self.uDeck[i])
-            self.hand.append(self.uDeck[i])
-            self.uDeck[i].drawn = 1
-            self.uDeck.pop(i)
             if (numpy.size(self.uDeck) == 0):
-                self.uDeck=self.discard
+                self.uDeck=[i for i in self.nDeck]
                 random.shuffle(self.uDeck)
-                for j in self.uDeck:
-                    self.uDeck[j].drawn = 0
+            for i in range(5):
+                    self.hand.append(self.uDeck[i])
+            for i in range(5):
+                self.uDeck.pop(0)
