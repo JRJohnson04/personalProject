@@ -40,6 +40,6 @@ class Deck():
             self.uDeck.pop(i)
             if (numpy.size(self.uDeck) == 0):
                 self.uDeck=self.discard
-                #random.shuffle(self.uDeck)
+                random.shuffle(self.uDeck)
                 for j in self.uDeck:
                     self.uDeck[j].drawn = 0

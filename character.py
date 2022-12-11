@@ -4,7 +4,6 @@ from utils import loadSprite
 import random
 
 class character:
-    myDeck = deck.Deck()
     myClass = ""
     myHP = 0
     myDef = 0
@@ -12,6 +11,8 @@ class character:
     def __init__(self, inClass, inHP):
         self.myClass = inClass
         self.myHP = inHP
+        self.myDeck = deck.Deck()
+
 class player(character):
     def __init__(self):
         super().__init__("Machine", 30)
@@ -46,7 +47,6 @@ class enemy(character):
     def __init__(self, inClass):
         self.myClass=inClass
         self.myHP = 15
-        self.myDeck.uDeck=[]
         super().__init__(inClass,15)
     def fillEDeck(self):
         sprite6= loadSprite("Placeholder", False)

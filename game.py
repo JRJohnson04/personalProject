@@ -28,13 +28,35 @@ class Game:
         self.tank.fillEDeck()
         self.enemyOnField = self.dummy
         print(self.player.myDeck.getLength())
-        #random.shuffle(self.player.myDeck.uDeck)
+        random.shuffle(self.player.myDeck.uDeck)
         self.player.myDeck.draw()
         print(self.player.myDeck.getHandLength())
         while True:
             self.handleInput()
             self.gameLogic()
             self.back()
+
+    def doCardPlay(self,inType,inCard):
+        if (inType == cardOBJ.attack):
+            inCard.attack.play(self.enemyOnField)
+            x = random.randint(0, 14)
+            enemyTempCard = self.enemyOnField.myDeck.uDeck[x]
+            enemyTempCard.play(self.player)
+        elif (inType == cardOBJ.defense):
+            inCard.defense.play(self.player)
+            x = random.randint(0, 14)
+            enemyTempCard = self.enemyOnField.myDeck.uDeck[x]
+            enemyTempCard.play(self.player)
+        elif (inType == cardOBJ.buff):
+            inCard.buff.play(self.player)
+            x = random.randint(0, 14)
+            enemyTempCard = self.enemyOnField.myDeck.uDeck[x]
+            enemyTempCard.play(self.player)
+        elif (inType == cardOBJ.debuff):
+            inCard.debuff.play(self.enemyOnField)
+            x = random.randint(0, 14)
+            enemyTempCard = self.enemyOnField.myDeck.uDeck[x]
+            enemyTempCard.play(self.player)
 
     def handleInput(self):
 
@@ -45,8 +67,27 @@ class Game:
                 if event.key == pygame.K_1:
                     tempCard= self.player.myDeck.hand[0]
                     tempType = type(tempCard)
-                    if (tempType == cardOBJ.attack):
-                        tempCard.play(self.enemyOnField)
+                    self.doCardPlay(tempType,tempCard)
+                if event.key == pygame.K_2:
+                    tempCard=self.player.myDeck.hand[1]
+                    tempType = type(tempCard)
+                    self.doCardPlay(tempType, tempCard)
+                if event.key == pygame.K_3:
+                    tempCard = self.player.myDeck.hand[2]
+                    tempType = type(tempCard)
+                    self.doCardPlay(tempType, tempCard)
+                if event.key == pygame.K_4:
+                    tempCard = self.player.myDeck.hand[3]
+                    tempType = type(tempCard)
+                    self.doCardPlay(tempType, tempCard)
+                if event.key == pygame.K_5:
+                    tempCard = self.player.myDeck.hand[4]
+                    tempType = type(tempCard)
+                    self.doCardPlay(tempType, tempCard)
+
+
+
+
 
     def gameLogic(self):
         pass
