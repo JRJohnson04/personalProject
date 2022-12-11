@@ -4,11 +4,13 @@ class card:
     flavorText = ""
     played = 0
     drawn = 0
+    sprite = ""
     def __init__(self, inName, inText, inSprite):
         self.name = inName
         self.flavorText = inText
-        self.sprite = loadSprite(inSprite, True)
-
+        self.sprite = inSprite
+    def __str__(self):
+        return self.name
 class attack(card):
     damage = 0
     damageType = ""
@@ -17,11 +19,15 @@ class attack(card):
         self.flavorText = inText
         self.damage = inDamage
         self.damageType = inType
-        self.sprite = loadSprite(inSprite, True)
+        self.sprite = inSprite
+
     def play(self, target):
         if (self.played==0):
             self.played=1
             target.myHP-= self.damage
+    def place(self, surface, position, sprite):
+        surface.blit(sprite,position )
+
 
 class defense(card):
     armor = 0
@@ -29,7 +35,8 @@ class defense(card):
         self.name = inName
         self.flavorText = inText
         self.armor = inArmor
-        self.sprite = loadSprite(inSprite, True)
+        self.sprite = inSprite
+
     def play(self,target):
         if (self.played==0):
             self.played=1
@@ -45,7 +52,7 @@ class effect(card):
         self.flavorText = inText
         self.isDOT=inDOT
         self.duration=inDuration
-        self.sprite = loadSprite(inSprite, False)
+        self.sprite = inSprite
 class buff(effect):
     buff = 0
     def __init__(self, inName, inText, inDOT, inDuration, inBuff,inSprite):
@@ -54,7 +61,9 @@ class buff(effect):
         self.isDOT=inDOT
         self.duration=inDuration
         self.buff = inBuff
-        self.sprite = loadSprite(inSprite, True)
+        self.sprite = inSprite
+
+
     def play(self,target):
         if (self.played==0):
             self.played=1
@@ -69,7 +78,9 @@ class debuff(effect):
         self.isDOT=inDOT
         self.duration=inDuration
         self.debuff = inDebuff
-        self.sprite = loadSprite(inSprite, True)
+        self.sprite = inSprite
+
+
     def play(self, target):
         if (self.played==0):
             self.played=1
